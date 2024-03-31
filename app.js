@@ -18,6 +18,9 @@ app.use(express.json());
 app.use(cookieParser(""));
 app.use(cors());
 app.use(router);
+app.get("/", (req, res) => {
+  res.status(200).send("This is amazon web api")
+})
 
 app.listen(port, () => {
   console.log(`server running on port ${port}`);
