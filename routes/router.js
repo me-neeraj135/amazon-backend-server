@@ -10,7 +10,7 @@ const authenticate = require("../middlewares/authentication");
 router.get("/getproducts", async (req, res) => {
   try {
     const productsdata = await PRODUCTS.find();
-    res.status(201).json(productsdata);
+    res.status(200).json(productsdata);
   } catch (error) {
     res.status(400).json(productsdata);
 
@@ -153,7 +153,7 @@ router.get("/validateUser", authenticate, async (req, res) => {
 router.delete("/removeItem/:id", authenticate, async (req, res) => {
   try {
     const { id } = req.params;
-    req.rootUser.carts = req.rootUser.carts.filter(cv => {
+    req.rootUser.carts = req.rootUser.carts.filter((cv) => {
       return cv.id !== id;
     });
     req.rootUser.save();
@@ -169,7 +169,7 @@ router.delete("/removeItem/:id", authenticate, async (req, res) => {
 
 router.get("/logout", authenticate, async (req, res) => {
   try {
-    req.rootUser.tokens = req.rootUser.tokens.filter(cv => {
+    req.rootUser.tokens = req.rootUser.tokens.filter((cv) => {
       return cv.token !== req.token;
     });
     res.clearCookie("Amazonweb", { path: "/" });
